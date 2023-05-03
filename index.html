@@ -1,0 +1,55 @@
+<div class="container">
+
+  <header>
+    <h2>Sign Up Form (Coded)</h2>
+    <p>Based on <a href="https://drc8llcc7rqy7.cloudfront.net/shots/2409898/24-sign-up-large" target="blank">Sign Up Design #39</a> by <a href="https://dribbble.com/deab" target="blank">Denis Abdullin</a>.</p>
+  </header>
+  
+  <div id="app" class="signup">
+    <transition name="fade" mode="out-in">
+      <component :is="compname" @change_comp="swapcomp($event)"></component>
+    </transition>
+  </div>
+  
+  <template id="signup-form">
+      <form>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" v-model="email" />
+          <span v-if="email.length > 1">{{ email_msg }}</span>
+        </div>
+        <div class="form-group">
+          <label for="psw1">Password <span id="characters">(6 or more characters required)</span></label>
+          <input type="password" v-model="password1" />
+          <span v-show="msg1">{{ pwd1_msg }}</span>
+        </div>
+        <div class="form-group">
+          <label for="psw2">Repeat Password</label>
+          <input type="password" v-model="password2" />
+          <span v-show="msg2">{{ pwd2_msg }}</span>
+        </div>
+        <div class="form-group">
+          <button :class="{active: disable_btn}":disabled="disable_btn" @click.prevent="on_signup()">Sign Up</button>
+          <a href="#0" @click="show_terms()">terms & conditions</a>
+        </div>
+      </form>
+    </template>
+  
+    <template id="results">
+      <div class="results">
+        <h4>FORM SUBMIT SUCCESSFUL</h4>
+        <p>Form data gets saved and/or sent to server. There could also be a confirmation sent to email address</p>
+        <p>Button would take you to some sort of after signup page.<br>In this case it just shows the form again</p>
+        <button @click="back_to_signup()">Continue</button>
+      </div>
+    </template>
+  
+    <template id="terms">
+      <div class="terms">
+        <h4>TERMS & CONDITIONS</h4>
+        <p>A list of terms, conditions, and policies.</p>
+        <button @click="back_to_signup()">Back</button>
+      </div>
+    </template>
+  
+</div>
